@@ -2,7 +2,7 @@
   #app
     #nav
       router-link(to='/') Home
-      router-link(to='/about') About
+      router-link(to='/login') Login
     router-view
 </template>
 

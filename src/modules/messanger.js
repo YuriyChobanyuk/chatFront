@@ -23,7 +23,7 @@ export default {
   },
   mutations: {
     initMessages: function(state, messages){
-      messages.sort((a, b) => b.creationDate - a.creationDate);
+      messages.sort((a, b) => checkDates(a.creationDate, b.creationDate));
       state.messages = messages;
     },
     updateMessages: function(state){
@@ -37,4 +37,10 @@ export default {
       return state.messages;
     }
   }
+}
+
+function checkDates(dateA, dateB){
+  var a = new Date(dateA);
+  var b = new Date(dateB);
+  return b - a;
 }

@@ -19,7 +19,7 @@ Vue.filter('redactDate', function (date) {
 
   var result = mydate + '.' + month + ' - ' + hour + ':' + minutes;
   return result;
-})
+});
 
 new Vue({
   router,
