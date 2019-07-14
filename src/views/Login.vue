@@ -5,11 +5,11 @@
       .singup.form-title.active-title(@click='toggleForms') Sing up
       .login.form-title(@click='toggleForms') Log in
     .row.justify-center
-      form.singup-form(action="#" v-if='isSingup')
+      form.singup-form(action="#" v-if='isSingup' )
         input.singup-form__name(type='text' name='username' id='singup-username' placeholder='enter username' required pattern='.{2,}' v-model='username')
         input.singup-form__password(type='password' name='password' id='singup-password' placeholder='enter password' required pattern='.{6,}' v-model='password')
         input.singup-form__check-password(type='password' name='password' id='password' placeholder='repeat password' required)
-        button.submit-button.singup-submit(type='submit') Sing up
+        button.submit-button.singup-submit(type='submit' @click.prevent='register') Sing up
       form.login-form(action="#" v-else)
         input.login-form__name(type='text' name='username' id='login-username' placeholder='enter username' required pattern='.{2,}' v-model='username')
         input.login-form__password(type='password' name='password' id='login-password' placeholder='enter password' required pattern='.{6,}' v-model='password')
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import authenticationService from '@/services/authenticationService'
 export default {
   name: 'Login',
   data(){
@@ -45,6 +46,12 @@ export default {
     },
     login: function(){
       const {username, password} = this;
+    },
+    async register(){
+      const response = await authenticationService.register({
+        username: this.username,
+        password: this.password
+      })
     }
   }
 }
